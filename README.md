@@ -18,7 +18,7 @@ First install `Python 3` and the latest version of `pip`, a popular Python packa
 
 Let's just quickly talk about why we need virtual environments. Over time, you or apps you have installed onto your computer may have installed many different Python packages and libraries. A virtual environment is isolated from all this and acts as a fresh machine with no packages or libraries installed. This helps you keep track of what libraries and packages your specific application uses. Usually, these requirements are stored in a `requirements.txt` file that we will create later in this tutorial, so don't worry about it for now.
 
-Use the following two lines to create and then enter the environment call myEnv:
+Use the following two lines to create and then enter the environment called myEnv:
 
 ```
 $ python3 - m venv myEnv
