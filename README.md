@@ -35,16 +35,64 @@ If you're building an app and end up needing to install other packages or librar
 
 Now we have everything we need, so we can start actually creating our application.
 
-## Let's Build An App!
+## Let's Build Something!
 
 ### Creating a Route
 
-First thing we need to do is create a main file for app to live in. Let's call it `app.py` and put it in our `app` directory.
+For this section, refer to the code in `example1.py`. Create a Python file in the main directory of your app. First, add the following lines to your file:
 
+```
+from flask import Flask, render_template, jsonify
+app = Flask(__name__)
+```
+
+The first line imports some important functions from the Flask package, and the second line actually initializes our app. Now, we need to actually add a route so that people can access our app. Add the following code:
+
+```
+@app.route('/')
+def first_route():
+    return jsonify({"message": "Hello KTP!"})
+```
+
+Let's stop for a second and go over what these lines do. This code creates a URL route that we access in a browser or through an HTTP request. When this route is requested, the function `first_route` will be called. The function returns a Python dictionary that has been reformatted by the `jsonify` function as an HTTP response that includes our data so it can easily be read by a client. It's easier to see this in action. Add the following lines to your code:
+
+```
+if(__name__ == '__main__'):
+    app.run()
+```
+
+Then, go to your command line, navigate to your app's directory, and run your app with the following command:
+
+```
+$ python [your app filename].py
+```
+
+This should produce the following output:
+
+![](running.png)
+
+The app is now up and running. Open up a web browser and go to http://127.0.0.1:5000/. You should see:
+
+![](browser.png)
+
+Congratulations! You've created your first route and accessed it through a browser. This is the first step in building a larger Flask app.
 
 ### Rendering a Webpage
 
+Now, let's try actually viewing a webpage through our Flask app. First, copy over the `templates` directory and the `static` directory from this repo and move them into the directory where you are storing the Python file you've been working in.
 
+Add the following lines to your app file just below the first route we created (again, use `example1.py` for reference):
 
+```
+@app.route('/home')
+def home_route():
+    return render_template('index.html')
+```
 
-## What Next?
+This creates a new route called `/home` that will run the `home_route` function when requested. The `render_template` function searches your app's directory for a directory called `templates`, and then looks for a file in that directory that matches the argument supplied. In this case, it looks for `index.html`. Flask then sends a formatted HTTP response that your browser can read and use to render an HTML webpage.
+
+Let's try it. Re-run the command `python [your app filename].py` and go to http://127.0.0.1:5000/home in your browser. You should now see:
+
+![](website.png)
+
+We've now created a simple website with Flask.
